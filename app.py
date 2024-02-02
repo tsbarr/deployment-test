@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 
 from flask import Flask, jsonify
-
+# from flask_sslify import SSLify # for https redirect
 
 #################################################
 # Database Setup
@@ -25,7 +25,8 @@ Passenger = Base.classes.passenger
 # Flask Setup
 #################################################
 app = Flask(__name__)
-
+# Redirect all HTTP traffic to HTTPS
+# sslify = SSLify(app)
 
 #################################################
 # Flask Routes
@@ -82,4 +83,6 @@ def passengers():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=80
+        # , debug=True
+    )
