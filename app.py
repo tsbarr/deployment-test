@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 
 from flask import Flask, jsonify
+from flask_cors import CORS
 # from flask_sslify import SSLify # for https redirect
 
 #################################################
@@ -25,6 +26,7 @@ Passenger = Base.classes.passenger
 # Flask Setup
 #################################################
 app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 # Redirect all HTTP traffic to HTTPS
 # sslify = SSLify(app)
 
