@@ -4,5 +4,5 @@ COPY ./requirements.txt /deploy/
 COPY ./titanic.sqlite /deploy/
 WORKDIR /deploy/
 RUN pip install -r requirements.txt
-EXPOSE 80
+EXPOSE 443
 ENTRYPOINT ["python", "app.py"]
