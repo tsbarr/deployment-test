@@ -5,7 +5,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from flask_cors import CORS
 # from flask_sslify import SSLify # for https redirect
 
@@ -25,15 +25,14 @@ Passenger = Base.classes.passenger
 #################################################
 # Flask Setup
 #################################################
-app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+app = Flask(__name__, template_folder='templates')
+CORS(app)
 # Redirect all HTTP traffic to HTTPS
 # sslify = SSLify(app)
 
 #################################################
 # Flask Routes
 #################################################
-
 @app.route("/")
 def welcome():
     """List all available api routes."""
@@ -43,6 +42,9 @@ def welcome():
         f"/api/v1.0/passengers"
     )
 
+@app.route("/price_predictor")
+def price_predictor():
+    return render_template('templates/home.html')
 
 @app.route("/api/v1.0/names")
 def names():
@@ -85,6 +87,6 @@ def passengers():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=443, ssl_context='adhoc'
+    app.run(host='0.0.0.0', port=80#, ssl_context='adhoc'
         # , debug=True
     )
